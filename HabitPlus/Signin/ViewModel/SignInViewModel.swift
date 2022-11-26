@@ -12,11 +12,12 @@ class SignInViewModel: ObservableObject {
   
   @Published var email = ""
   @Published var password = ""
+
   
-  private var cancellable: AnyCancellable?
+    private var cancellable: AnyCancellable?
     private var cancellableRequest: AnyCancellable?
-  
-  private let publisher = PassthroughSubject<Bool, Never>()
+    
+    private let publisher = PassthroughSubject<Bool, Never>()
     private let interactor: SignInInteractor
   
   @Published var uiState: SignInUIState = .none
@@ -34,9 +35,10 @@ class SignInViewModel: ObservableObject {
   }
   
   deinit {
-    cancellable?.cancel()
+      cancellable?.cancel()
       cancellableRequest?.cancel()
   }
+
   
   func login() {
     self.uiState = .loading
@@ -55,7 +57,9 @@ class SignInViewModel: ObservableObject {
           } receiveValue: { success in
               
               // aqui acontece o sucesso
-              print(success)
+              let auth = UserAuth(idToken: success.accessToken, refreshToken: success.refreshToken, expires: success.expires, tokenType: success.tokenType)
+              self.interactor.insertAuth(userAuth: auth)
+              
               self.uiState = .goToHomeScreen
           }
 

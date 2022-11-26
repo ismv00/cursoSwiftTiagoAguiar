@@ -59,7 +59,7 @@ extension SplashView {
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) {
-            let viewModel = SplashViewModel()
+            let viewModel = SplashViewModel(interactor: SplashInteractor())
             SplashView(viewModel: viewModel)
                 .previewDevice("iPhone 14 Pro Max")
                 .preferredColorScheme($0)

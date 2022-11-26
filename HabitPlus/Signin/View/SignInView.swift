@@ -34,7 +34,7 @@ struct SignInView: View {
                   .scaledToFit()
                   .padding(.horizontal, 48)
                 
-                Text("Login")
+                  Text("Login")
                   .foregroundColor(.orange)
                   .font(Font.system(.title).bold())
                   .padding(.bottom, 8)
@@ -47,7 +47,7 @@ struct SignInView: View {
                 
                 registerLink
                 
-                Text("Copyright - AT Digital LTDA 2019")
+                Text("Copyright - CSVM Tecnologia 2021")
                   .foregroundColor(Color.gray)
                   .font(Font.system(size: 13).bold())
                   .padding(.top, 16)
@@ -70,7 +70,7 @@ struct SignInView: View {
           .navigationBarHidden(navigationHidden)
         }
         .onAppear {
-          self.navigationHidden = true
+            self.navigationHidden = true
         }
         .onDisappear {
           self.navigationHidden = false
