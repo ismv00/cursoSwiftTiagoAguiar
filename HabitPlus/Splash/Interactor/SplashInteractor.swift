@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 class SplashInteractor {
+    private let remote: SplashRemoteDataSource = .shared 
     private let local: LocalDataSource = .shared
 }
 
@@ -23,6 +24,6 @@ extension SplashInteractor {
     
     func refreshToken(refreshRequest request: RefreshRequest) -> Future<
         SignInResponse, AppError> {
-        
+           return remote.refreshToken(request: request)
     }
 }

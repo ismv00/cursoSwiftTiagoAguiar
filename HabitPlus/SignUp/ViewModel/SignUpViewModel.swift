@@ -81,38 +81,21 @@ class SignUpViewModel : ObservableObject {
                             case .finished:
                                 break
                             }
-                        } receiveValue: { successSignIn in
+                        } receiveValue: { success in
                             print(created)
+                            
+                            let auth = UserAuth(idToken: success.accessToken,
+                                                refreshToken: success.refreshToken,
+                                                expires: Date().timeIntervalSince1970 + Double(success.expires),
+                                                tokenType: success.tokenType)
+                            self.interactor.insertAuth(userAuth: auth)
+                            
                             self.publisher.send(created)
                             self.uiState = .success
                         }
 
             }
 
-        
-//        interactor.postUser(SignUpRequest: signUpRequest) { (successResponse, errorResponse) in
-//            if let error = errorResponse {
-//                DispatchQueue.main.async {
-//                    self.uiState = .error(error.detail)
-//                }
-//            }
-            
-//            if let success = successResponse {
-////                WebService.login(request: SignInRequest(email: self.email, password: self.password)) { (successResponse, errorResponse) in
-////                    if let errorSignIn = errorResponse {
-////                        DispatchQueue.main.async {
-////                            self.uiState = .error(errorSignIn.detail.message)
-////                        }
-////                    }
-////                    if let successSignIn = successResponse {
-////                        DispatchQueue.main.async {
-////                            print(successSignIn)
-////                            self.publisher.send(success)
-////                            self.uiState = .success
-////                        }
-////                    }
-////                }
-//            }
         }
     }
 }
